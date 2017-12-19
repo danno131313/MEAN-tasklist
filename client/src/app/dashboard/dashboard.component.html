@@ -1,0 +1,24 @@
+<h2>Welcome, {{ currUser.name }}!</h2>
+<form (submit)="onSubmit()" >
+    <input type="text" name="title" required minlength="5" placeholder="Title" [(ngModel)]="listItem.title" #title="ngModel"/>
+    <input type="text" name="description" required minlength="10" placeholder="Description" [(ngModel)]="listItem.description" #description="ngModel"/>
+    <select name="user" [(ngModel)]="listItem.user">
+        <option value="none">None</option>
+        <option *ngFor="let user of users" value="{{ user | json }}">{{ user.name }}</option>
+    </select>
+    <input type="submit" value="Add to List" [disabled]="title.errors || description.errors" />
+</form>
+
+<p class="error" *ngIf="title.errors && title.dirty">* Title must be at least 5 characters</p>
+<p class="error" *ngIf="description.errors && description.dirty">* Description must be at least 10 characters</p>
+
+<p>Before I die I want to...</p>
+<div *ngFor="let item of items">
+    <input type="checkbox" [checked]="item.checked" (click)="toggleCheck(item._id)"/>
+    <span *ngIf="item.user"> {{ item.user.name }} | </span>
+    <span>{{ item.title }} - {{ item.description }} --{{ item.createdAt | date: medium }}</span>
+</div>
+<p>List of other users (Click to view profile):</p>
+<div *ngFor="let user of users">
+    <a [routerLink]="['/users', user._id]">{{ user.name }}</a>
+</div>

@@ -1,0 +1,5 @@
+<h1>Bucket Lists</h1>
+<form (submit) = "onSubmit()">
+    <p>Name: <input type="text" name="name" required minlength="2" [(ngModel)]="user.name" #name="ngModel"/></p>
+    <input type="submit" value="Submit" [disabled]="name.errors"/>
+</form>

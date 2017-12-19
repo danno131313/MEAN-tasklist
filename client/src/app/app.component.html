@@ -1,0 +1,5 @@
+<div *ngIf="currRoute != '/login' && currRoute != '/'">
+    <a [routerLink]="['dashboard']">Home</a>
+    <a href="/logout">Logout</a>
+</div>
+<router-outlet></router-outlet>
