@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
   }
 
   toggleCheck(id) {
-      this._listService.toggleCheck(id, () => {
+      this._listService.toggleCheck(id, (checkedItem) => {
         this._listService.retrieveItems(this.currUser._id, (items) => {
             this.items = items;
         });

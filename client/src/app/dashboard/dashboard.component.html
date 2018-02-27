@@ -1,5 +1,5 @@
 <h2>Welcome, {{ currUser.name }}!</h2>
-<form (submit)="onSubmit()" >
+<form #itemForm="ngForm" (submit)="onSubmit(); itemForm.reset()" >
     <input type="text" name="title" required minlength="5" placeholder="Title" [(ngModel)]="listItem.title" #title="ngModel"/>
     <input type="text" name="description" required minlength="10" placeholder="Description" [(ngModel)]="listItem.description" #description="ngModel"/>
     <select name="user" [(ngModel)]="listItem.user">
@@ -13,10 +13,12 @@
 <p class="error" *ngIf="description.errors && description.dirty">* Description must be at least 10 characters</p>
 
 <p>Before I die I want to...</p>
-<div *ngFor="let item of items">
+<div class="listItem" *ngFor="let item of items; let idx = index">
     <input type="checkbox" [checked]="item.checked" (click)="toggleCheck(item._id)"/>
-    <span *ngIf="item.user"> {{ item.user.name }} | </span>
-    <span>{{ item.title }} - {{ item.description }} --{{ item.createdAt | date: medium }}</span>
+    <p class="itemTitle">{{ item.title }}:</p>
+    <p class="itemDesc">{{ item.description }}</p>
+    <p class="itemDate">Created {{ item.createdAt | date: medium }} by <span class="itemPoster">{{ item.poster.name }}</span>.</p>
+    <span class="taggedUser" *ngIf="item.user"> --tagged: {{ item.user.name }} </span>
 </div>
 <p>List of other users (Click to view profile):</p>
 <div *ngFor="let user of users">

@@ -44,14 +44,21 @@ module.exports = {
         } else {
             req.body.user = JSON.parse(req.body.user);
         }
+        req.body.poster = req.session.user;
         ListItem.create(req.body, (err, item) => {
             if (err) {
                 console.log(err);
                 return res.redirect('/');
             }
-            User.findById(req.session.user._id, (err, user) => {
+            User.findById(req.session.user._id).exec((err, user) => {
+                if (err) {
+                    console.log("Wrong user in session");
+                    return res.redirect("/");
+                }
                 user.listItems.push(item);
-                user.save();
+                user.save((err) => {
+                    if (err) {console.log(err);}
+                });
                 if (req.body.user) {
                     User.findById(req.body.user._id, (err, user2) => {
                         user2.listItems.push(item);
@@ -66,9 +73,9 @@ module.exports = {
     },
 
     getItems: function(req, res) {
-        User.findById(req.params.id).populate('listItems').exec((err, user) => {
+        User.findById(req.params.id).exec((err, user) => {
             if (err) {
-                console.log(err);
+                console.log("Couldn't get items, ", err);
                 return res.redirect('/');
             }
             return res.json(user.listItems);
@@ -83,9 +90,61 @@ module.exports = {
 
     check: function(req, res) {
         ListItem.findById(req.params.id, (err, item) => {
-            item.checked = !item.checked;
-            item.save();
-            return res.json(item);
+            if (err) {
+                console.log(err);
+                return res.redirect("/");
+            }
+            if (req.session.user._id != item.poster._id) {
+                if (item.user) {
+                    if (req.session.user._id != item.user._id) {
+                        console.log("That was not your item to check off!");
+                        return res.redirect("/");
+                    }
+                } else {
+                    console.log("That was not your item to check off!");
+                    return res.redirect("/");
+                }
+            }
+
+            User.findById(item.poster._id, (err, user) => {
+                if (err) {
+                    console.log(err);
+                    return res.redirect("/");
+                }
+                for (let curritem of user.listItems) {
+                    if (curritem._id == req.params.id) {
+                        curritem.checked = !curritem.checked;
+                        break;
+                    }
+                }
+                user.save((err) => {
+                    if (err) {
+                        console.log(err);
+                        return res.redirect("/");
+                    }
+                    if (item.user) {
+                        User.findById(item.user._id, (err, otheruser) => {
+                            if (err) {
+                                console.log(err);
+                                return res.redirect("/");
+                            }
+                            for (let item of otheruser.listItems) {
+                                if (item._id == req.params.id) {
+                                    item.checked = !item.checked;
+                                    break;
+                                }
+                            }
+                            otheruser.save((err) => {
+                                if (err) {
+                                    console.log(err);
+                                    return res.redirect("/");
+                                }
+                                return res.json(user);
+                            });
+                        });
+                    }
+                });
+            });
         });
     }
 }

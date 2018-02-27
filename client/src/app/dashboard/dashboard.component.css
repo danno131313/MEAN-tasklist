@@ -2,3 +2,38 @@
     font-size: .8em;
     color: red;
 }
+
+.listItem {
+  height: auto;
+  width: 60%;
+  border: 1px solid black;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.listItem p {
+}
+
+.itemTitle {
+  display: inline;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.itemDesc {
+  display: inline;
+}
+
+.itemDate {
+  display: block;
+  font-size: .8em;
+}
+
+.itemPoster {
+  font-weight: bold;
+}
+
+.taggedUser {
+  color: grey;
+  font-size: .8em;
+}
