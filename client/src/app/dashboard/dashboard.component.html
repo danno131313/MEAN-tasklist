@@ -1,24 +1,41 @@
 <h2>Welcome, {{ currUser.name }}!</h2>
 <div id="wrapper">
-  <form class="ui segment form" #itemForm="ngForm" (submit)="onSubmit(); itemForm.reset()" >
-    <div class="fields">
-      <div class="four wide field">
-        <input id="title" type="text" name="title" required minlength="5" placeholder="Title" [(ngModel)]="listItem.title" #title="ngModel"/>
+  <div id="forms">
+    <form class="ui twelve wide column segment form" #itemForm="ngForm" (submit)="onSubmit(); itemForm.reset()" >
+      <p class="prompt">Add a new item to your bucket list!</p>
+      <div class="fields">
+        <div class="four wide field">
+          <label for="title">Title:</label>
+          <input id="title" type="text" name="title" required minlength="5" placeholder="Title" [(ngModel)]="listItem.title" #title="ngModel"/>
+        </div>
+        <div class="eight wide field">
+          <label for="description">Description:</label>
+          <input id="desc" type="text" name="description" required minlength="10" placeholder="Description" [(ngModel)]="listItem.description" #description="ngModel"/>
+        </div>
+        <div class="four wide field">
+          <label for="user">Tag someone:</label>
+          <select id="user-dropdown" name="user" [(ngModel)]="listItem.user">
+            <option value="none">None</option>
+            <option *ngFor="let user of users" value="{{ user | json }}">{{ user.name }}</option>
+          </select>
+        </div>
       </div>
-      <div class="eight wide field">
-        <input id="desc" type="text" name="description" required minlength="10" placeholder="Description" [(ngModel)]="listItem.description" #description="ngModel"/>
-      </div>
-      <div class="four wide field">
-        <select class="ui dropdown" name="user" [(ngModel)]="listItem.user">
-          <option value="none">None</option>
-          <option *ngFor="let user of users" value="{{ user | json }}">{{ user.name }}</option>
-        </select>
+      <p class="error" *ngIf="title.errors && title.dirty">* Title must be at least 5 characters</p>
+      <p class="error" *ngIf="description.errors && description.dirty">* Description must be at least 10 characters</p>
+      <input class="ui button" type="submit" value="Add to List" [disabled]="title.errors || description.errors" />
+    </form>
+
+    <div id="otherusers" class="ui four wide column segment">
+      <p class="prompt">View another user's bucket list!</p>
+      <div class="ui search selection fluid dropdown item">
+        <div class="text">Search users</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <a class="item" *ngFor="let user of users" [routerLink]="['/users', user._id]">{{ user.name }}</a>
+        </div>
       </div>
     </div>
-    <p class="error" *ngIf="title.errors && title.dirty">* Title must be at least 5 characters</p>
-    <p class="error" *ngIf="description.errors && description.dirty">* Description must be at least 10 characters</p>
-    <input class="ui button" type="submit" value="Add to List" [disabled]="title.errors || description.errors" />
-  </form>
+  </div>
 
   <div id="list">
     <p id="before">Before I die I want to...</p>
@@ -29,14 +46,5 @@
       <p class="itemDate">Created {{ item.createdAt | date: medium }} by <span class="itemPoster">{{ item.poster.name }}</span>.</p>
       <span class="taggedUser" *ngIf="item.user"> --tagged: {{ item.user.name }} </span>
     </div>
-    <p>List of other users (Click to view profile):</p>
-    <div *ngFor="let user of users">
-      <a [routerLink]="['/users', user._id]">{{ user.name }}</a>
-    </div>
   </div>
 </div>
-<script>
-  $('.ui.dropdown')
-    .dropdown()
-  ;
-</script>

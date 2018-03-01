@@ -35,7 +35,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n", ""]);
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n::-webkit-input-placeholder { /* Chrome */\n  color: #8d8d8d !important;\n}\n:-ms-input-placeholder { /* IE 10+ */\n  color: #8d8d8d !important;\n}\n::-moz-placeholder { /* Firefox 19+ */\n  color: #8d8d8d !important;\n  opacity: 1 !important;\n}\n:-moz-placeholder { /* Firefox 4 - 18 */\n  color: #8d8d8d !important;\n  opacity: 1 !important;\n}\n", ""]);
 
 // exports
 

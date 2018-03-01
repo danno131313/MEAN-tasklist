@@ -33,5 +33,7 @@ module.exports = (app) => {
         home.check(req, res);
     });
 
-    app.get('/semantic')
+    app.get('*', (req, res) => {
+       return res.redirect("/");
+    });
 }

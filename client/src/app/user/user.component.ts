@@ -21,7 +21,7 @@ export class UserComponent implements OnInit {
           this._userService.getUser(id, (data) => {
               this.user = data;
               this._listService.retrieveItems(this.user._id, (items) => {
-                this.items = items;
+                this.items = items.reverse();
               });
           });
       });
@@ -34,7 +34,7 @@ export class UserComponent implements OnInit {
   toggleCheck(id) {
       this._listService.toggleCheck(id, () => {
         this._listService.retrieveItems(this.user._id, (items) => {
-            this.items = items;
+            this.items = items.reverse();
         });
       });
   }

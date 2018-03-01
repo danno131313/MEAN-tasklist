@@ -203,7 +203,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".error {\n    font-size: .8em;\n    color: red;\n}\n\n#wrapper {\n  padding: 30px;\n  background: white;\n}\n\nform.ui.segment {\n  background: #6eb29a;\n  margin-bottom: 20px;\n}\n\n#wrapper form input.ui.button {\n  background: #ef8771;\n}\n\n#before {\n  font-size: 1.3em;\n  font-style: italic;\n  color: #d34b2e;\n}\n\nh2 {\n  background: #339271;\n  color: #9dcaba;\n  padding: 10px;\n}\n\n.completed {\n  text-decoration: line-through;\n}\n\n#list {\n  padding: 20px;\n  background: #efa771;\n  border-radius: .8em;\n}\n\n/*.listItem {\n  height: auto;\n  width: 60%;\n  border: 1px solid black;\n  margin-bottom: 15px;\n  padding: 10px;\n}\n\n.listItem p {\n}*/\n\n.itemTitle {\n  display: inline;\n  font-weight: bold;\n  font-size: 1.2em;\n}\n\n.itemDesc {\n  display: inline;\n}\n\n.itemDate {\n  display: block;\n  font-size: .8em;\n}\n\n.itemPoster {\n  font-weight: bold;\n}\n\n.taggedUser {\n  color: grey;\n  font-size: .8em;\n}\n", ""]);
+exports.push([module.i, ".error {\n    font-size: .8em;\n    color: red;\n}\n\n#forms {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: space-evenly;\n      -ms-flex-pack: space-evenly;\n          justify-content: space-evenly;\n  margin: 20px 0;\n}\n\n#forms .ui.segment {\n  margin-top: 0;\n  margin-bottom: 0;\n}\n\n#wrapper {\n  padding: 0 30px 30px 30px;\n  background: white;\n}\n\n.prompt {\n  margin-top: 0;\n  margin-bottom: 10px;\n  color: #da654a;\n  font-size: 1.1em;\n}\n\nform.ui.segment {\n  background: white;\n  border-color: #339271;\n}\n\n.ui.grid .ui.segment {\n  margin: 0 auto;\n}\n\n#wrapper form input.ui.button {\n  background: #ef8771;\n}\n\n#before {\n  font-size: 1.3em;\n  font-style: italic;\n  color: #d34b2e;\n}\n\n.text {\n  color: #8d8d8d;\n}\n\nh2 {\n  background: #4ca082;\n  color: #9dcaba;\n  padding: 40px 10px;\n}\n\n.completed {\n  text-decoration: line-through;\n}\n\n#list {\n  padding: 20px;\n  background: #efa771;\n  border-radius: .8em;\n}\n\n/*.listItem {\n  height: auto;\n  width: 60%;\n  border: 1px solid black;\n  margin-bottom: 15px;\n  padding: 10px;\n}\n\n.listItem p {\n}*/\n\n.itemTitle {\n  display: inline;\n  font-weight: bold;\n  font-size: 1.2em;\n  margin-left: 10px;\n}\n\n.itemDesc {\n  display: inline;\n  font-size: 1.1em;\n}\n\n.itemTitle, .itemDesc {\n  vertical-align: text-bottom;\n}\n\n.itemDate {\n  margin-top: 4px;\n  display: block;\n  font-size: .9em;\n}\n\n.itemPoster {\n  font-weight: bold;\n}\n\n.taggedUser {\n  color: grey;\n  font-size: .9em;\n}\n\n#otherusers {\n  border-color: #339271;\n}\n", ""]);
 
 // exports
 
@@ -216,7 +216,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2>Welcome, {{ currUser.name }}!</h2>\n<div id=\"wrapper\">\n  <form class=\"ui segment form\" #itemForm=\"ngForm\" (submit)=\"onSubmit(); itemForm.reset()\" >\n    <div class=\"fields\">\n      <div class=\"four wide field\">\n        <input id=\"title\" type=\"text\" name=\"title\" required minlength=\"5\" placeholder=\"Title\" [(ngModel)]=\"listItem.title\" #title=\"ngModel\"/>\n      </div>\n      <div class=\"eight wide field\">\n        <input id=\"desc\" type=\"text\" name=\"description\" required minlength=\"10\" placeholder=\"Description\" [(ngModel)]=\"listItem.description\" #description=\"ngModel\"/>\n      </div>\n      <div class=\"four wide field\">\n        <select class=\"ui dropdown\" name=\"user\" [(ngModel)]=\"listItem.user\">\n          <option value=\"none\">None</option>\n          <option *ngFor=\"let user of users\" value=\"{{ user | json }}\">{{ user.name }}</option>\n        </select>\n      </div>\n    </div>\n    <p class=\"error\" *ngIf=\"title.errors && title.dirty\">* Title must be at least 5 characters</p>\n    <p class=\"error\" *ngIf=\"description.errors && description.dirty\">* Description must be at least 10 characters</p>\n    <input class=\"ui button\" type=\"submit\" value=\"Add to List\" [disabled]=\"title.errors || description.errors\" />\n  </form>\n\n  <div id=\"list\">\n    <p id=\"before\">Before I die I want to...</p>\n    <div class=\"listItem ui segment\" *ngFor=\"let item of items; let idx = index\">\n      <input type=\"checkbox\" [checked]=\"item.checked\" (click)=\"toggleCheck(item._id)\"/>\n      <p [ngClass]=\"{'completed': item.checked}\" class=\"itemTitle\">{{ item.title }}:</p>\n      <p class=\"itemDesc\">{{ item.description }}</p>\n      <p class=\"itemDate\">Created {{ item.createdAt | date: medium }} by <span class=\"itemPoster\">{{ item.poster.name }}</span>.</p>\n      <span class=\"taggedUser\" *ngIf=\"item.user\"> --tagged: {{ item.user.name }} </span>\n    </div>\n    <p>List of other users (Click to view profile):</p>\n    <div *ngFor=\"let user of users\">\n      <a [routerLink]=\"['/users', user._id]\">{{ user.name }}</a>\n    </div>\n  </div>\n</div>\n<script>\n  $('.ui.dropdown')\n    .dropdown()\n  ;\n</script>\n"
+module.exports = "<h2>Welcome, {{ currUser.name }}!</h2>\n<div id=\"wrapper\">\n  <div id=\"forms\">\n    <form class=\"ui twelve wide column segment form\" #itemForm=\"ngForm\" (submit)=\"onSubmit(); itemForm.reset()\" >\n      <p class=\"prompt\">Add a new item to your bucket list!</p>\n      <div class=\"fields\">\n        <div class=\"four wide field\">\n          <label for=\"title\">Title:</label>\n          <input id=\"title\" type=\"text\" name=\"title\" required minlength=\"5\" placeholder=\"Title\" [(ngModel)]=\"listItem.title\" #title=\"ngModel\"/>\n        </div>\n        <div class=\"eight wide field\">\n          <label for=\"description\">Description:</label>\n          <input id=\"desc\" type=\"text\" name=\"description\" required minlength=\"10\" placeholder=\"Description\" [(ngModel)]=\"listItem.description\" #description=\"ngModel\"/>\n        </div>\n        <div class=\"four wide field\">\n          <label for=\"user\">Tag someone:</label>\n          <select id=\"user-dropdown\" name=\"user\" [(ngModel)]=\"listItem.user\">\n            <option value=\"none\">None</option>\n            <option *ngFor=\"let user of users\" value=\"{{ user | json }}\">{{ user.name }}</option>\n          </select>\n        </div>\n      </div>\n      <p class=\"error\" *ngIf=\"title.errors && title.dirty\">* Title must be at least 5 characters</p>\n      <p class=\"error\" *ngIf=\"description.errors && description.dirty\">* Description must be at least 10 characters</p>\n      <input class=\"ui button\" type=\"submit\" value=\"Add to List\" [disabled]=\"title.errors || description.errors\" />\n    </form>\n\n    <div id=\"otherusers\" class=\"ui four wide column segment\">\n      <p class=\"prompt\">View another user's bucket list!</p>\n      <div class=\"ui search selection fluid dropdown item\">\n        <div class=\"text\">Search users</div>\n        <i class=\"dropdown icon\"></i>\n        <div class=\"menu\">\n          <a class=\"item\" *ngFor=\"let user of users\" [routerLink]=\"['/users', user._id]\">{{ user.name }}</a>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div id=\"list\">\n    <p id=\"before\">Before I die I want to...</p>\n    <div class=\"listItem ui segment\" *ngFor=\"let item of items; let idx = index\">\n      <input type=\"checkbox\" [checked]=\"item.checked\" (click)=\"toggleCheck(item._id)\"/>\n      <p [ngClass]=\"{'completed': item.checked}\" class=\"itemTitle\">{{ item.title }}:</p>\n      <p class=\"itemDesc\">{{ item.description }}</p>\n      <p class=\"itemDate\">Created {{ item.createdAt | date: medium }} by <span class=\"itemPoster\">{{ item.poster.name }}</span>.</p>\n      <span class=\"taggedUser\" *ngIf=\"item.user\"> --tagged: {{ item.user.name }} </span>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -254,6 +254,9 @@ var DashboardComponent = (function () {
     }
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
+        $(document).ready(function () {
+            $('.ui.dropdown').dropdown();
+        });
         this._userService.getSession(function (data) {
             _this.currUser = data.user;
             _this._userService.users.subscribe(function (users) {
@@ -262,7 +265,7 @@ var DashboardComponent = (function () {
                 });
             });
             _this._listService.retrieveItems(data.user._id, function (items) {
-                _this.items = items;
+                _this.items = items.reverse();
             });
         });
     };
@@ -271,7 +274,7 @@ var DashboardComponent = (function () {
         this._listService.addItem(this.listItem, function (data) {
             _this.listItem = { title: '', description: '', user: 'none' };
             _this._listService.retrieveItems(_this.currUser._id, function (items) {
-                _this.items = items;
+                _this.items = items.reverse();
             });
         });
     };
@@ -279,7 +282,7 @@ var DashboardComponent = (function () {
         var _this = this;
         this._listService.toggleCheck(id, function (checkedItem) {
             _this._listService.retrieveItems(_this.currUser._id, function (items) {
-                _this.items = items;
+                _this.items = items.reverse();
             });
         });
     };
@@ -566,7 +569,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".listItem {\n  height: auto;\n  width: 60%;\n  border: 1px solid black;\n  margin-bottom: 15px;\n  padding: 10px;\n}\n\n.listItem p {\n}\n\n.itemTitle {\n  display: inline;\n  font-weight: bold;\n  font-size: 1.2em;\n}\n\n.itemDesc {\n  display: inline;\n}\n\n.itemDate {\n  display: block;\n  font-size: .8em;\n}\n\n.itemPoster {\n  font-weight: bold;\n}\n\n.taggedUser {\n  color: grey;\n  font-size: .8em;\n}\n", ""]);
+exports.push([module.i, ".completed {\n  text-decoration: line-through;\n}\n\n#wrapper {\n  padding: 0 30px;\n  background: white;\n}\n\n#list {\n  padding: 20px;\n  background: #efa771;\n  border-radius: .8em;\n}\n\n#list .listItem {\n  margin: 20px 0;\n}\n\nh2 {\n  background: #4ca082;\n  color: #9dcaba;\n  padding: 40px 10px;\n}\n\n.label {\n  font-size: 1.3em;\n  font-style: italic;\n  color: #d34b2e;\n}\n\n.itemTitle {\n  display: inline;\n  font-weight: bold;\n  font-size: 1.2em;\n  margin-left: 10px;\n}\n\n.itemDesc {\n  display: inline;\n  font-size: 1.1em;\n}\n\n.itemTitle, .itemDesc {\n  vertical-align: text-bottom;\n}\n\n.itemDate {\n  margin-top: 4px;\n  display: block;\n  font-size: .9em;\n}\n\n.itemPoster {\n  font-weight: bold;\n}\n\n.taggedUser {\n  color: grey;\n  font-size: .9em;\n}\n", ""]);
 
 // exports
 
@@ -579,7 +582,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/user/user.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2>Bucket List</h2>\n<p>Done:</p>\n<div *ngFor=\"let item of items\">\n    <div class=\"listItem\" *ngIf=\"item.checked == true\">\n        <input type=\"checkbox\" *ngIf=\"item.user\" checked [disabled]=\"item.poster._id != currUser._id && item.user._id != currUser._id\" (click)=\"toggleCheck(item._id)\"/>\n        <input type=\"checkbox\" *ngIf=\"!item.user\" checked [disabled]=\"item.poster._id != currUser._id\" (click)=\"toggleCheck(item._id)\"/>\n        <p class=\"itemTitle\">{{ item.title }}:</p>\n        <p class=\"itemDesc\">{{ item.description }}</p>\n        <p class=\"itemDate\">Created {{ item.createdAt | date: medium }} by <span class=\"itemPoster\">{{ item.poster.name }}</span>.</p>\n        <span class=\"taggedUser\" *ngIf=\"item.user\"> --tagged: {{ item.user.name }} </span>\n    </div>\n</div>\n<p>Pending:</p>\n<div *ngFor=\"let item of items\">\n    <div class=\"listItem\" *ngIf=\"item.checked == false\">\n        <input type=\"checkbox\" *ngIf=\"item.user\" [disabled]=\"item.poster._id != currUser._id && item.user._id != currUser._id\" (click)=\"toggleCheck(item._id)\"/>\n        <input type=\"checkbox\" *ngIf=\"!item.user\" [disabled]=\"item.poster._id != currUser._id\" (click)=\"toggleCheck(item._id)\"/>\n        <p class=\"itemTitle\">{{ item.title }}:</p>\n        <p class=\"itemDesc\">{{ item.description }}</p>\n        <p class=\"itemDate\">Created {{ item.createdAt | date: medium }} by <span class=\"itemPoster\">{{ item.poster.name }}</span>.</p>\n        <span class=\"taggedUser\" *ngIf=\"item.user\"> --tagged: {{ item.user.name }} </span>\n    </div>\n</div>\n"
+module.exports = "<h2>{{ user.name }}'s Bucket List</h2>\n<div id=\"wrapper\">\n  <div id=\"list\">\n    <p class=\"label\">Done:</p>\n    <div *ngFor=\"let item of items\">\n      <div class=\"listItem ui segment\" *ngIf=\"item.checked == true\">\n        <input type=\"checkbox\" *ngIf=\"item.user\" checked [disabled]=\"item.poster._id != currUser._id && item.user._id != currUser._id\" (click)=\"toggleCheck(item._id)\"/>\n        <input type=\"checkbox\" *ngIf=\"!item.user\" checked [disabled]=\"item.poster._id != currUser._id\" (click)=\"toggleCheck(item._id)\"/>\n        <p class=\"itemTitle completed\">{{ item.title }}:</p>\n        <p class=\"itemDesc\">{{ item.description }}</p>\n        <p class=\"itemDate\">Created {{ item.createdAt | date: medium }} by <span class=\"itemPoster\">{{ item.poster.name }}</span>.</p>\n        <span class=\"taggedUser\" *ngIf=\"item.user\"> --tagged: {{ item.user.name }} </span>\n      </div>\n    </div>\n    <p class=\"label\">Pending:</p>\n    <div *ngFor=\"let item of items\">\n      <div class=\"listItem ui segment\" *ngIf=\"item.checked == false\">\n        <input type=\"checkbox\" *ngIf=\"item.user\" [disabled]=\"item.poster._id != currUser._id && item.user._id != currUser._id\" (click)=\"toggleCheck(item._id)\"/>\n        <input type=\"checkbox\" *ngIf=\"!item.user\" [disabled]=\"item.poster._id != currUser._id\" (click)=\"toggleCheck(item._id)\"/>\n        <p class=\"itemTitle\">{{ item.title }}:</p>\n        <p class=\"itemDesc\">{{ item.description }}</p>\n        <p class=\"itemDate\">Created {{ item.createdAt | date: medium }} by <span class=\"itemPoster\">{{ item.poster.name }}</span>.</p>\n        <span class=\"taggedUser\" *ngIf=\"item.user\"> --tagged: {{ item.user.name }} </span>\n      </div>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -618,7 +621,7 @@ var UserComponent = (function () {
             _this._userService.getUser(id, function (data) {
                 _this.user = data;
                 _this._listService.retrieveItems(_this.user._id, function (items) {
-                    _this.items = items;
+                    _this.items = items.reverse();
                 });
             });
         });
@@ -630,7 +633,7 @@ var UserComponent = (function () {
         var _this = this;
         this._listService.toggleCheck(id, function () {
             _this._listService.retrieveItems(_this.user._id, function (items) {
-                _this.items = items;
+                _this.items = items.reverse();
             });
         });
     };

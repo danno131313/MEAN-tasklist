@@ -1,23 +1,28 @@
-<h2>Bucket List</h2>
-<p>Done:</p>
-<div *ngFor="let item of items">
-    <div class="listItem" *ngIf="item.checked == true">
+<h2>{{ user.name }}'s Bucket List</h2>
+<div id="wrapper">
+  <div id="list">
+    <p class="label">Done:</p>
+    <div *ngFor="let item of items">
+      <div class="listItem ui segment" *ngIf="item.checked == true">
         <input type="checkbox" *ngIf="item.user" checked [disabled]="item.poster._id != currUser._id && item.user._id != currUser._id" (click)="toggleCheck(item._id)"/>
         <input type="checkbox" *ngIf="!item.user" checked [disabled]="item.poster._id != currUser._id" (click)="toggleCheck(item._id)"/>
-        <p class="itemTitle">{{ item.title }}:</p>
+        <p class="itemTitle completed">{{ item.title }}:</p>
         <p class="itemDesc">{{ item.description }}</p>
         <p class="itemDate">Created {{ item.createdAt | date: medium }} by <span class="itemPoster">{{ item.poster.name }}</span>.</p>
         <span class="taggedUser" *ngIf="item.user"> --tagged: {{ item.user.name }} </span>
+      </div>
     </div>
-</div>
-<p>Pending:</p>
-<div *ngFor="let item of items">
-    <div class="listItem" *ngIf="item.checked == false">
+    <p class="label">Pending:</p>
+    <div *ngFor="let item of items">
+      <div class="listItem ui segment" *ngIf="item.checked == false">
         <input type="checkbox" *ngIf="item.user" [disabled]="item.poster._id != currUser._id && item.user._id != currUser._id" (click)="toggleCheck(item._id)"/>
         <input type="checkbox" *ngIf="!item.user" [disabled]="item.poster._id != currUser._id" (click)="toggleCheck(item._id)"/>
         <p class="itemTitle">{{ item.title }}:</p>
         <p class="itemDesc">{{ item.description }}</p>
         <p class="itemDate">Created {{ item.createdAt | date: medium }} by <span class="itemPoster">{{ item.poster.name }}</span>.</p>
         <span class="taggedUser" *ngIf="item.user"> --tagged: {{ item.user.name }} </span>
+      </div>
     </div>
+  </div>
 </div>
+

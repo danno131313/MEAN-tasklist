@@ -1,27 +1,54 @@
-.listItem {
-  height: auto;
-  width: 60%;
-  border: 1px solid black;
-  margin-bottom: 15px;
-  padding: 10px;
+.completed {
+  text-decoration: line-through;
 }
 
-.listItem p {
+#wrapper {
+  padding: 0 30px;
+  background: white;
+}
+
+#list {
+  padding: 20px;
+  background: #efa771;
+  border-radius: .8em;
+}
+
+#list .listItem {
+  margin: 20px 0;
+}
+
+h2 {
+  background: #4ca082;
+  color: #9dcaba;
+  padding: 40px 10px;
+}
+
+.label {
+  font-size: 1.3em;
+  font-style: italic;
+  color: #d34b2e;
 }
 
 .itemTitle {
   display: inline;
   font-weight: bold;
   font-size: 1.2em;
+  margin-left: 10px;
 }
 
 .itemDesc {
   display: inline;
+  font-size: 1.1em;
+}
+
+.itemTitle, .itemDesc {
+  vertical-align: text-bottom;
 }
 
 .itemDate {
+  margin-top: 4px;
   display: block;
-  font-size: .8em;
+  font-size: .9em;
 }
 
 .itemPoster {
@@ -30,5 +57,5 @@
 
 .taggedUser {
   color: grey;
-  font-size: .8em;
+  font-size: .9em;
 }

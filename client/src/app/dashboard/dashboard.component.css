@@ -3,14 +3,36 @@
     color: red;
 }
 
+#forms {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px 0;
+}
+
+#forms .ui.segment {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 #wrapper {
-  padding: 30px;
+  padding: 0 30px 30px 30px;
   background: white;
 }
 
+.prompt {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #da654a;
+  font-size: 1.1em;
+}
+
 form.ui.segment {
-  background: #6eb29a;
-  margin-bottom: 20px;
+  background: white;
+  border-color: #339271;
+}
+
+.ui.grid .ui.segment {
+  margin: 0 auto;
 }
 
 #wrapper form input.ui.button {
@@ -23,10 +45,14 @@ form.ui.segment {
   color: #d34b2e;
 }
 
+.text {
+  color: #8d8d8d;
+}
+
 h2 {
-  background: #339271;
+  background: #4ca082;
   color: #9dcaba;
-  padding: 10px;
+  padding: 40px 10px;
 }
 
 .completed {
@@ -54,15 +80,22 @@ h2 {
   display: inline;
   font-weight: bold;
   font-size: 1.2em;
+  margin-left: 10px;
 }
 
 .itemDesc {
   display: inline;
+  font-size: 1.1em;
+}
+
+.itemTitle, .itemDesc {
+  vertical-align: text-bottom;
 }
 
 .itemDate {
+  margin-top: 4px;
   display: block;
-  font-size: .8em;
+  font-size: .9em;
 }
 
 .itemPoster {
@@ -71,5 +104,9 @@ h2 {
 
 .taggedUser {
   color: grey;
-  font-size: .8em;
+  font-size: .9em;
+}
+
+#otherusers {
+  border-color: #339271;
 }
