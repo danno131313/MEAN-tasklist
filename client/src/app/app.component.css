@@ -1,0 +1,15 @@
+#navbar {
+  background: #ffdfc6;
+}
+
+#navbar a {
+  color: #d3762e;
+}
+
+#navbar .active.item {
+  border-bottom: 2px solid #d3762e;
+}
+
+.ui.button {
+  background: #d34b2e;
+}

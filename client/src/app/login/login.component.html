@@ -1,5 +1,12 @@
-<h1>Bucket Lists</h1>
-<form (submit) = "onSubmit()">
-    <p>Name: <input type="text" name="name" required minlength="2" [(ngModel)]="user.name" #name="ngModel"/></p>
-    <input type="submit" value="Submit" [disabled]="name.errors"/>
-</form>
+<div id="wrapper">
+  <div class="ui raised segment" id="login-box">
+    <h1>Bucket List</h1>
+    <form class="ui form" (submit) = "onSubmit()">
+      <div class="field">
+        <label>Name: </label>
+        <input type="text" placeholder="Name" name="name" required minlength="2" [(ngModel)]="user.name" #name="ngModel"/>
+      </div>
+      <input class="ui primary button" type="submit" value="Submit" [disabled]="name.errors"/>
+    </form>
+  </div>
+</div>

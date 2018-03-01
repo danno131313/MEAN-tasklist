@@ -32,4 +32,6 @@ module.exports = (app) => {
     app.get('/items/:id/check', (req, res) => {
         home.check(req, res);
     });
+
+    app.get('/semantic')
 }

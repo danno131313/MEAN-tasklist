@@ -1,0 +1,40 @@
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 15%;
+  height: 100%;
+  background: #6eb29a;
+}
+
+#login-box {
+  padding: 40px 70px;
+  background: white;
+  border: 3px solid #1f8d66;
+}
+
+#login-box label {
+  color: #d34b2e;
+}
+
+#login-box .field input {
+  border: 1px solid lightgrey;
+}
+
+#login-box .field input:focus {
+  border: 1px solid lightblue;
+}
+
+#login-box .field input:hover {
+  border: 1px solid lightblue;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #d34b2e;
+  text-align: center;
+}
+
+.ui.button.primary {
+  background: #ef8771;
+}

@@ -3,7 +3,43 @@
     color: red;
 }
 
-.listItem {
+#wrapper {
+  padding: 30px;
+  background: white;
+}
+
+form.ui.segment {
+  background: #6eb29a;
+  margin-bottom: 20px;
+}
+
+#wrapper form input.ui.button {
+  background: #ef8771;
+}
+
+#before {
+  font-size: 1.3em;
+  font-style: italic;
+  color: #d34b2e;
+}
+
+h2 {
+  background: #339271;
+  color: #9dcaba;
+  padding: 10px;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+#list {
+  padding: 20px;
+  background: #efa771;
+  border-radius: .8em;
+}
+
+/*.listItem {
   height: auto;
   width: 60%;
   border: 1px solid black;
@@ -12,7 +48,7 @@
 }
 
 .listItem p {
-}
+}*/
 
 .itemTitle {
   display: inline;
