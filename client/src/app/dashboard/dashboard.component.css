@@ -10,8 +10,8 @@
 }
 
 #forms .ui.segment {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0 20px;
+  flex: auto;
 }
 
 #wrapper {
@@ -53,10 +53,6 @@ h2 {
   background: #4ca082;
   color: #9dcaba;
   padding: 40px 10px;
-}
-
-.completed {
-  text-decoration: line-through;
 }
 
 #list {
@@ -109,4 +105,12 @@ h2 {
 
 #otherusers {
   border-color: #339271;
+}
+
+input + p {
+  text-decoration: none;
+}
+
+input:checked + p {
+  text-decoration: line-through;
 }

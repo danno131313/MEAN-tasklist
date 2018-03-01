@@ -41,7 +41,7 @@
     <p id="before">Before I die I want to...</p>
     <div class="listItem ui segment" *ngFor="let item of items; let idx = index">
       <input type="checkbox" [checked]="item.checked" (click)="toggleCheck(item._id)"/>
-      <p [ngClass]="{'completed': item.checked}" class="itemTitle">{{ item.title }}:</p>
+      <p class="itemTitle">{{ item.title }}:</p>
       <p class="itemDesc">{{ item.description }}</p>
       <p class="itemDate">Created {{ item.createdAt | date: medium }} by <span class="itemPoster">{{ item.poster.name }}</span>.</p>
       <span class="taggedUser" *ngIf="item.user"> --tagged: {{ item.user.name }} </span>
